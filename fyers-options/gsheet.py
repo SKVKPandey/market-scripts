@@ -4,12 +4,13 @@ import gspread
 import sys
 import traceback  # For detailed error logging
 
-# Replace with your actual access token obtained from Fyers
-access_token = ""
+from config import need, get
+
+access_token = need("FYERS_ACCESS_TOKEN")
 
 # Define the scope and credentials for Google Sheets API
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-creds = ServiceAccountCredentials.from_json_keyfile_name("serviceAccount.json", scope)
+creds = ServiceAccountCredentials.from_json_keyfile_name(get("GOOGLE_SERVICE_ACCOUNT", "serviceAccount.json"), scope)
 client = gspread.authorize(creds)
 
 # Variable to store the last received data
@@ -21,7 +22,6 @@ expected_symbols = [
     "NSE:TCS-EQ",
     "NSE:HDFCBANK-EQ",
     "NSE:INFY-EQ",
-    "NSE:HDFC-EQ",
     "NSE:ICICIBANK-EQ",
     "NSE:KOTAKBANK-EQ",
     "NSE:LT-EQ",
@@ -115,7 +115,7 @@ def write_to_google_sheet(data):
     global headers_written
     try:
         # Open an existing Google Sheet by name
-        sheet_name = "FyersAPI"  # Replace with your existing sheet name
+        sheet_name = get("SHEET_NAME", "FyersAPI")
         sheet = client.open(sheet_name).sheet1
         
         if not headers_written:

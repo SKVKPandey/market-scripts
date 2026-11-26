@@ -4,15 +4,16 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import time
 
-# Replace these with your Fyers API details
-access_token = ""
-app_id = ""
+from config import need, get
+
+access_token = need("FYERS_ACCESS_TOKEN")
+app_id = need("FYERS_CLIENT_ID")
 symbol = "NSE:RELIANCE"  # Replace with the symbol of your choice
 
 # Fetch option chain data
 def fetch_option_chain(symbol, expiry, retries=3, delay=5):
     url = f"https://api.fyers.in/v7/quotes/{symbol}?expiry={expiry}"
-    headers = {"Authorization": f"Bearer {access_token}"}
+    headers = {"Authorization": f"{app_id}:{access_token}"}
     for _ in range(retries):
         response = requests.get(url, headers=headers)
         if response.status_code == 200:

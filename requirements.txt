@@ -1,0 +1,10 @@
+pandas
+matplotlib
+mplfinance
+seaborn
+requests
+beautifulsoup4
+python-dotenv
+fyers-apiv3
+gspread
+oauth2client

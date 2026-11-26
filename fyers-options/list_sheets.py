@@ -1,9 +1,10 @@
+from config import get, need  # noqa: F401
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
 # Define the scope and credentials
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-creds = ServiceAccountCredentials.from_json_keyfile_name("serviceAccount.json", scope)
+creds = ServiceAccountCredentials.from_json_keyfile_name(get("GOOGLE_SERVICE_ACCOUNT", "serviceAccount.json"), scope)
 
 # Authorize with credentials
 client = gspread.authorize(creds)

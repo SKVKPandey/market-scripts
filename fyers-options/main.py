@@ -27,8 +27,9 @@ def onopen(fyers):
     fyers.subscribe(symbols=symbols, data_type=data_type)
     fyers.keep_running()
 
-# Replace the access_token with your actual access token obtained from Fyers
-access_token = ""
+from config import need
+
+access_token = need("FYERS_ACCESS_TOKEN")
 
 # Create a FyersDataSocket instance with the provided parameters
 fyers = data_ws.FyersDataSocket(

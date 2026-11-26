@@ -1,15 +1,17 @@
 # Import the required module from the fyers_apiv3 package
 from fyers_apiv3 import fyersModel
 
+from config import need
+
 # Define your Fyers API credentials
-client_id = ""  # Replace with your client ID
-secret_key = ""  # Replace with your secret key
-redirect_uri = ""  # Replace with your redirect URI
+client_id = need("FYERS_CLIENT_ID")
+secret_key = need("FYERS_SECRET_KEY")
+redirect_uri = need("FYERS_REDIRECT_URI")
 response_type = "code" 
 grant_type = "authorization_code"  
 
 # The authorization code received from Fyers after the user grants access
-auth_code = ""
+auth_code = need("FYERS_AUTH_CODE")
 
 # Create a session object to handle the Fyers API authentication and token generation
 session = fyersModel.SessionModel(
